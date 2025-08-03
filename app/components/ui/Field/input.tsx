@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Input, Button, Textarea, RadioGroup, Radio } from "@heroui/react"
+import React, { useState, useEffect } from 'react'
+import { Input, Button, Textarea, RadioGroup, Radio, Card, CardBody } from "@heroui/react"
 import { useLanguage } from '../../../lib/language-context'
 import axios from 'axios'
-import toast from 'react-hot-toast'
 
 interface FormData {
   name: string
@@ -31,6 +30,13 @@ interface ContactFormProps {
   onSuccess?: () => void
 }
 
+interface ToastState {
+  show: boolean
+  type: 'success' | 'error'
+  title: string
+  description: string
+}
+
 const ContactForm = ({ onSuccess }: ContactFormProps) => {
   const { t } = useLanguage()
   const [formData, setFormData] = useState<FormData>({
@@ -46,6 +52,31 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
 
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [toast, setToast] = useState<ToastState>({
+    show: false,
+    type: 'success',
+    title: '',
+    description: ''
+  })
+
+  // Автоматически скрываем toast через 4 секунды
+  useEffect(() => {
+    if (toast.show) {
+      const timer = setTimeout(() => {
+        setToast(prev => ({ ...prev, show: false }))
+      }, 4000)
+      return () => clearTimeout(timer)
+    }
+  }, [toast.show])
+
+  const showToast = (type: 'success' | 'error', title: string, description: string) => {
+    setToast({
+      show: true,
+      type,
+      title,
+      description
+    })
+  }
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
@@ -125,19 +156,13 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
 
       const response = await axios.post('https://api.telegram.org/bot7654585303:AAF4PLGIngtvFrWEDB6utX0Q4Zy_kNSAygI/sendMessage', {
         chat_id: '610691463',
-        text: `New form submission:\n\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nAge: ${formData.age}\nRegion: ${formData.region}\nTelegram: ${formData.telegram}\nExperience: ${formData.hasPregnancyExperience}\nComment: ${formData.comment}`
+        text: `Новая регистрация:\n\nИмя: ${formData.name}\nНомер: ${formData.phone}\nEmail: ${formData.email}\nВозраст: ${formData.age}\nРегион: ${formData.region}\nTelegram: ${formData.telegram}\nОпыт с детьми: ${formData.hasPregnancyExperience}\rКомментарий: ${formData.comment}`
       })
 
       if (response.status === 200) {
-        toast.success(`${t('toast.successTitle')}\n${t('toast.successDescription')}`, {
-          duration: 4000,
-          position: 'top-center',
-        })
+        showToast('success', t('toast.successTitle'), t('toast.successDescription'))
       } else {
-        toast.error(`${t('toast.errorTitle')}\n${t('toast.errorDescription')}`, {
-          duration: 4000,
-          position: 'top-center',
-        })
+        showToast('error', t('toast.errorTitle'), t('toast.errorDescription'))
       }
 
       // Очистка формы после успешной отправки
@@ -158,10 +183,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
         onSuccess()
       }
     } catch (error) {
-      toast.error(`${t('toast.errorTitle')}\n${t('toast.errorDescription')}`, {
-        duration: 4000,
-        position: 'top-center',
-      })
+      showToast('error', t('toast.errorTitle'), t('toast.errorDescription'))
     } finally {
       setIsSubmitting(false)
     }
