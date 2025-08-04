@@ -191,6 +191,43 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
 
   return (
     <div className="w-full">
+      {/* Toast уведомление */}
+      {toast.show && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+          <Card 
+            className={`
+              border-2 shadow-lg animate-in slide-in-from-top-2 duration-300
+              ${toast.type === 'success' 
+                ? 'border-green-500' 
+                : 'border-red-500'
+              }
+            `}
+            style={{
+              backgroundColor: toast.type === 'success' ? '#22c55e' : '#ef4444',
+            }}
+          >
+            <CardBody className="p-4">
+              <div className="flex flex-col space-y-2">
+                <div className="font-bold text-sm text-white">
+                  {toast.title}
+                </div>
+                <div className="text-xs leading-relaxed text-white/90">
+                  {toast.description}
+                </div>
+                <Button
+                  size="sm"
+                  variant="light"
+                  className="self-end text-white hover:bg-white/10"
+                  onPress={() => setToast(prev => ({ ...prev, show: false }))}
+                >
+                  ✕
+                </Button>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
+      )}
+      
       <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Имя */}
@@ -318,6 +355,27 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
               >
                 {isSubmitting ? t('form.submitting') : t('form.submit')}
               </Button>
+            </div>
+
+            {/* Секция поддержки */}
+            <div className="pt-6 mt-6 border-t border-divider">
+              <div className="text-center space-y-4">
+                <p className="text-sm text-foreground/70">
+                  {t('form.support.description')}
+                </p>
+                <Button
+                  as="a"
+                  href="https://t.me/hopemothersuz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="ghost"
+                  color="primary"
+                  size="sm"
+                  className="font-medium"
+                >
+                  {t('form.support.button')}
+                </Button>
+              </div>
             </div>
           </form>
     </div>

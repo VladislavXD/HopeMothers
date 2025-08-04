@@ -1,5 +1,3 @@
-
-
 export const translations = {
   ru: {
     // SEO
@@ -27,6 +25,7 @@ export const translations = {
     },
     // Form fields
     form: {
+      copyright: "Все права защищены.",
       name: "Имя",
       namePlaceholder: "Введите ваше имя",
       phone: "Телефон",
@@ -46,7 +45,11 @@ export const translations = {
       commentPlaceholder: "Дополнительная информация о себе (необязательно)",
       submit: "Отправить заявку",
       submitting: "Отправка...",
-      required: "*"
+      required: "*",
+      support: {
+        description: "Возникли сложности? Напишите нам напрямую",
+        button: "Написать в Telegram"
+      }
     },
     // Validation messages
     validation: {
@@ -102,6 +105,7 @@ export const translations = {
     },
     // Form fields
     form: {
+      copyright: "All rights reserved.",
       name: "Name",
       namePlaceholder: "Enter your name",
       phone: "Phone",
@@ -121,7 +125,11 @@ export const translations = {
       commentPlaceholder: "Additional information about yourself (optional)",
       submit: "Submit Application",
       submitting: "Submitting...",
-      required: "*"
+      required: "*",
+      support: {
+        description: "Having trouble? Contact us directly",
+        button: "Message on Telegram"
+      }
     },
     // Validation messages
     validation: {
@@ -177,6 +185,7 @@ export const translations = {
     },
     // Form fields
     form: {
+      copyright: "Barcha huquqlar himoyalangan.",
       name: "Ism",
       namePlaceholder: "Ismingizni kiriting",
       phone: "Telefon",
@@ -196,7 +205,11 @@ export const translations = {
       commentPlaceholder: "O'zingiz haqida qo'shimcha ma'lumot (ixtiyoriy)",
       submit: "Ariza yuborish",
       submitting: "Yuborilmoqda...",
-      required: "*"
+      required: "*",
+      support: {
+        description: "Qiyinchilikka duch keldingizmi? Bevosita biz bilan bog'laning",
+        button: "Telegramda yozish"
+      }
     },
     // Validation messages
     validation: {

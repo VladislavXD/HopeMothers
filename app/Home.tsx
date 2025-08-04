@@ -19,12 +19,12 @@ const Home: NextPage = () => {
 
 	
   return (
-    <div className="">
+    <div className="overflow-hidden">
       {/* Hero Section */}
-      <div className="relative w-full h-screen bg-cover bg-center font-serif bg-no-repeat bg-[url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528')] flex items-center justify-center">
+      <div className="relative w-full h-screen bg-cover bg-center font-serif bg-no-repeat bg-[url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528')] flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/40"></div>
         
-        <div className="relative z-10 mt-20 sm:mt-40 max-w-2xl mx-auto text-center text-white">
+        <div className="relative z-10 max-w-2xl mx-auto text-center text-white px-4">
           <h1 className="text-white text-3xl sm:text-4xl font-bold mb-6 text-center drop-shadow-lg">
             {t('hero.title')}
           </h1>
@@ -37,11 +37,22 @@ const Home: NextPage = () => {
           <Button
             size="lg"
             color="primary"
-            className="text-white font-semibold px-8 py-3 text-lg"
+            className="text-white font-semibold px-8 py-3 text-lg mb-8"
             onClick={onOpen}
           >
             {t('hero.button')}
           </Button>
+        </div>
+
+        {/* Copyright Information */}
+        <div className="absolute bottom-8 left-0 right-0 z-20 font-serif">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <div className="bg-black/70 backdrop-blur-sm rounded-lg p-3 text-white">
+              <p className="text-xs leading-relaxed opacity-80">
+                © 2024-2025 {t('form.copyright')}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
