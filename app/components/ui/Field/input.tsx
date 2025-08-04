@@ -365,7 +365,7 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
                 </p>
                 <Button
                   as="a"
-                  href="https://t.me/hopemothersuz"
+                  href="https://t.me/suro_mothers"
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="ghost"
