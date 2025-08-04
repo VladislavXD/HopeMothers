@@ -155,8 +155,8 @@ const ContactForm = ({ onSuccess }: ContactFormProps) => {
       console.log('Form submission:', formData)
 
       const response = await axios.post('https://api.telegram.org/bot7654585303:AAF4PLGIngtvFrWEDB6utX0Q4Zy_kNSAygI/sendMessage', {
-        chat_id: '610691463',
-        text: `Новая регистрация:\n\nИмя: ${formData.name}\nНомер: ${formData.phone}\nEmail: ${formData.email}\nВозраст: ${formData.age}\nРегион: ${formData.region}\nTelegram: ${formData.telegram}\nОпыт с детьми: ${formData.hasPregnancyExperience}\rКомментарий: ${formData.comment}`
+        chat_id: '7136404986',
+        text: `Новая регистрация:\n\nИмя: ${formData.name}\nНомер: ${formData.phone}\nEmail: ${formData.email}\nВозраст: ${formData.age}\nРегион: ${formData.region}\nTelegram: ${formData.telegram}\nОпыт с детьми: ${formData.hasPregnancyExperience}\nКомментарий: ${formData.comment}`
       })
 
       if (response.status === 200) {
